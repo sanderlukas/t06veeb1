@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <script>
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = kuvaVastus;
+            function lisaKast() {
+                document.getElementById("sisestus").innerHTML+="<input type='number'/><br>";
+            }
+            
+            function nupuVajutus() {
+                    lisaKast();
+                }
+               
+            function saadaAndmed() {
+                let kastid = document.getElementById("sisestus").getElementsByTagName("input");
+                sisu = Array.prototype.slice.call(kastid).map(kast => kast.value).join(",");
+                xhr.open("GET", "ulesanne?arvud="+sisu, true);
+                xhr.send();
+            }
+            
+            function kuvaVastus() {
+                if (xhr.readyState === 4) {
+                    document.getElementById("vastus").innerHTML = xhr.responseText;
+                }
+            }
+            
+        </script>
+    </head>
+    <body onload="lisaKast(); lisaKast()">
+        <div>See rakendus arvutab sinu etteantud arvude summa</div>
+        <div id="sisestus"></div>
+        <div style="color:red; font-size:30px;" id="vastus"></div>
+        <input type='button' value="lisa" onclick="nupuVajutus()" />
+        <input type='button' value="arvuta" onclick="saadaAndmed()" />
+    </body>
+</html>

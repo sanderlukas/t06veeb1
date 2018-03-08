@@ -16,7 +16,7 @@
             }
             
             function kuvaVastus() {
-                if (xhr.readyState == 4) {
+                if (xhr.readyState === 4) {
                     document.getElementById("vastus").innerHTML = xhr.responseText;
                 }
             }
