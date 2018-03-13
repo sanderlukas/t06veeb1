@@ -21,7 +21,7 @@ public class Rakendus {
     @RequestMapping("/korrutus")
     int korrutamine(int arv1, int arv2) {
         return arv1 * arv2;
-    } //localhost:8080/korrutus?arv1=3&arv2=6/
+    } //localhost:8080/korrutus?arv1=3&arv2=6
     
     @RequestMapping("/ulesanne")
     int summa(String arvud) {
@@ -38,6 +38,13 @@ public class Rakendus {
         return sum;
         
         //return java.util.Arrays.asStream(arvud.split(",")).map(s -> s.trim).mapToInt(Integer::parseInt).sum();
+    }
+    @RequestMapping("/bodyf")
+    double bodyfat (double kehakaal, double pikkus, int age, int sugu) {
+        pikkus = pikkus / 100;
+        double bmi = kehakaal / (pikkus * pikkus);
+        double fatPercentage = (1.20 * bmi) + (0.23 * age) - (10.8 * sugu) - 5.4;
+        return fatPercentage;
     }
  
     public static void main(String[] args) {
